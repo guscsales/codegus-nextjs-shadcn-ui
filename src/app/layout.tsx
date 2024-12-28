@@ -15,15 +15,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="h-screen flex flex-col gap-24 items-center justify-center">
+      <body className="min-h-screen grid grid-cols-[20rem_1fr]">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <header className="flex flex-col gap-4 text-center">
-            <h1 className="text-3xl font-bold">
+          <aside className="flex flex-col gap-6 p-6 border-r border">
+            <h1 className="text-xl font-bold">
               <span>Codegus</span>{" "}
               <span className="text-zinc-500">{"// "}Shadcn UI</span>
             </h1>
@@ -31,7 +31,8 @@ export default function RootLayout({
               Série de Vídeos passando por cada componente...
             </div>
             <ThemeSwitcher />
-            <nav className="flex gap-1 justify-center">
+            <nav className="flex flex-col gap-1">
+              <div className="text-sm font-bold">Componentes</div>
               <Link
                 href="/button"
                 className="hover:underline font-bold text-blue-500"
@@ -39,10 +40,8 @@ export default function RootLayout({
                 Button
               </Link>
             </nav>
-          </header>
-          <main className="border border-solid border-zinc-200 rounded py-14 px-36">
-            {children}
-          </main>
+          </aside>
+          <main className="p-4">{children}</main>
         </ThemeProvider>
       </body>
     </html>
