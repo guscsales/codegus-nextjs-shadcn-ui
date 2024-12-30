@@ -39,6 +39,12 @@ export default function RootLayout({
               >
                 Button
               </Link>
+              <Link
+                href="/dialog"
+                className="hover:underline font-bold text-blue-500"
+              >
+                Dialog
+              </Link>
             </nav>
           </aside>
           <main className="p-4">{children}</main>
