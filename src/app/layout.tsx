@@ -3,6 +3,8 @@ import "./globals.css";
 import Link from "next/link";
 import ThemeSwitcher from "@/core-components/theme-switcher";
 import ThemeProvider from "@/providers/theme-provider";
+import {Toaster as SonnerToaster} from "@/components/ui/sonner";
+import {Toaster as ToastToaster} from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Série Shadcn/UI | Codegus",
@@ -45,9 +47,29 @@ export default function RootLayout({
               >
                 Dialog
               </Link>
+              <Link
+                href="/sonner"
+                className="hover:underline font-bold text-blue-500"
+              >
+                Sonner
+              </Link>
+              <Link
+                href="/toast"
+                className="hover:underline font-bold text-blue-500"
+              >
+                Toast
+              </Link>
+              <Link
+                href="/datatable"
+                className="hover:underline font-bold text-blue-500"
+              >
+                DataTable
+              </Link>
             </nav>
           </aside>
           <main className="p-4">{children}</main>
+          <SonnerToaster />
+          <ToastToaster />
         </ThemeProvider>
       </body>
     </html>
