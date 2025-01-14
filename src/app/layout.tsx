@@ -5,16 +5,42 @@ import ThemeSwitcher from "@/core-components/theme-switcher";
 import ThemeProvider from "@/providers/theme-provider";
 import {Toaster as SonnerToaster} from "@/components/ui/sonner";
 import {Toaster as ToastToaster} from "@/components/ui/toaster";
+import {readdir} from "fs/promises";
+import path from "path";
 
 export const metadata: Metadata = {
   title: "Série Shadcn/UI | Codegus",
 };
 
-export default function RootLayout({
+function Nav({name}: {name: string}) {
+  return (
+    <Link
+      href={`/${name}`}
+      className="hover:underline font-bold text-blue-500 capitalize"
+    >
+      {name}
+    </Link>
+  );
+}
+
+async function getNavItems() {
+  try {
+    const componentsPath = path.join(process.cwd(), "src/app/(components)");
+    const items = await readdir(componentsPath, {withFileTypes: true});
+    return items.filter((item) => item.isDirectory()).map((dir) => dir.name);
+  } catch (error) {
+    console.error("Error reading nav items:", error);
+    return [];
+  }
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const navItems = await getNavItems();
+
   return (
     <html lang="en">
       <body className="min-h-screen grid grid-cols-[20rem_1fr]">
@@ -35,36 +61,10 @@ export default function RootLayout({
             <ThemeSwitcher />
             <nav className="flex flex-col gap-1">
               <div className="text-sm font-bold">Componentes</div>
-              <Link
-                href="/button"
-                className="hover:underline font-bold text-blue-500"
-              >
-                Button
-              </Link>
-              <Link
-                href="/dialog"
-                className="hover:underline font-bold text-blue-500"
-              >
-                Dialog
-              </Link>
-              <Link
-                href="/sonner"
-                className="hover:underline font-bold text-blue-500"
-              >
-                Sonner
-              </Link>
-              <Link
-                href="/toast"
-                className="hover:underline font-bold text-blue-500"
-              >
-                Toast
-              </Link>
-              <Link
-                href="/datatable"
-                className="hover:underline font-bold text-blue-500"
-              >
-                DataTable
-              </Link>
+
+              {navItems.map((item) => (
+                <Nav key={item} name={item} />
+              ))}
             </nav>
           </aside>
           <main className="p-4">{children}</main>
