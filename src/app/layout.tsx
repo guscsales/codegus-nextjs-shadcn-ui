@@ -42,17 +42,6 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <SidebarProvider>
-            {/* <aside className="flex flex-col gap-6 p-6 border-r border">
-              <h1 className="text-xl font-bold">
-                <span>Codegus</span>{" "}
-                <span className="text-zinc-500">{"// "}Shadcn UI</span>
-              </h1>
-              <div className="font-light text-zinc-400">
-                Série de Vídeos passando por cada componente...
-              </div>
-              <ThemeSwitcher />
-              
-            </aside> */}
             <AppSidebar items={navItems} />
             <main className="p-4">
               <SidebarTrigger />

@@ -48,7 +48,7 @@ export function AppSidebar({items}: Props) {
               {items.map((item) => (
                 <SidebarMenuItem key={item}>
                   <SidebarMenuButton asChild>
-                    <Link href={`/${item}`}>
+                    <Link href={`/${item}`} className="capitalize">
                       <span>{item}</span>
                     </Link>
                   </SidebarMenuButton>
